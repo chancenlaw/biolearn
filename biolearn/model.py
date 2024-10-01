@@ -488,6 +488,54 @@ model_definitions = {
             "transform": lambda sum: sum + 55.808884324,
         },
     },
+    "Bohlin": {
+        "year": 2016,
+        "species": "Human",
+        "tissue": "Blood",
+        "source": "https://doi.org/10.1186/s13073-020-00752-3",
+        "output": "Gestational Age",
+        "model": {
+            "type": "LinearMethylationModel",
+            "file": "Bohlin.csv",
+            "transform": lambda sum: sum + 277.2421,
+        },
+    },
+    "DNAmClockCortical": {
+        "year": 2020,
+        "species": "Human",
+        "tissue": "Cortex, Blood",
+        "source": "https://doi.org/10.1093/brain/awaa334",
+        "output": "Human Cortext Age (Years)",
+        "model": {
+            "type": "LinearMethylationModel",
+            "file": "DNAmClockCortical.csv",
+            "transform": lambda sum: sum + 0.577682570446177,
+        },
+    },
+    "Mayne": {
+        "year": 2016,
+        "species": "Human",
+        "tissue": "Placenta",
+        "source": "https://doi.org/10.2217/epi-2016-0103",
+        "output": "Gestational age",
+        "model": {
+            "type": "LinearMethylationModel",
+            "file": "Mayne.csv",
+            "transform": lambda sum: sum + 24.99026,
+        },
+    },
+    "VidalBralo": {
+        "year": 2018,
+        "species": "Human",
+        "tissue": "Blood",
+        "source": "https://doi.org/10.3389/fgene.2016.00126",
+        "output": "Age (Years)",
+        "model": {
+            "type": "LinearMethylationModel",
+            "file": "VidalBralo.csv",
+            "transform": lambda sum: sum + 84.7,
+        },
+    },
 }
 
 
