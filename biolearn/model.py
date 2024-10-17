@@ -509,7 +509,7 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "DNAmClockCortical.csv",
-            "transform": lambda sum: sum + 0.577682570446177,
+            "transform": lambda sum: anti_trafo(sum + 0.577682570446177),
         },
     },
     "Mayne": {
