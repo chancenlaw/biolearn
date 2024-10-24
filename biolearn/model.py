@@ -16,6 +16,8 @@ def anti_trafo(x, adult_age=20):
     return y
 
 
+CLOCK_FOUNDATION_USAGE = "For cosmetics or life insurance applications, contact UCLA TDG regarding licensing status. For all other commercial usage `contact the Clock Foundation <https://clockfoundation.org/contact-us/>`_."
+
 model_definitions = {
     "Horvathv1": {
         "year": 2013,
@@ -46,7 +48,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "Lin.csv",
-            "transform": lambda sum: sum + 12.2169841,
         },
     },
     "PhenoAge": {
@@ -58,7 +59,9 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "PhenoAge.csv",
-            "transform": lambda sum: sum + 60.664,
+        },
+        "usage": {
+            "commercial": CLOCK_FOUNDATION_USAGE,
         },
     },
     "YingCausAge": {
@@ -70,7 +73,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "YingCausAge.csv",
-            "transform": lambda sum: sum + 86.80816381,
         },
     },
     "YingDamAge": {
@@ -82,7 +84,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "YingDamAge.csv",
-            "transform": lambda sum: sum + 543.4315887,
         },
     },
     "YingAdaptAge": {
@@ -94,7 +95,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "YingAdaptAge.csv",
-            "transform": lambda sum: sum - 511.9742762,
         },
     },
     "Horvathv2": {
@@ -107,6 +107,9 @@ model_definitions = {
             "type": "LinearMethylationModel",
             "file": "Horvath2.csv",
             "transform": lambda sum: anti_trafo(sum - 0.447119319),
+        },
+        "usage": {
+            "commercial": CLOCK_FOUNDATION_USAGE,
         },
     },
     "PEDBE": {
@@ -138,7 +141,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "DunedinPoAm38.csv",
-            "transform": lambda sum: sum - 0.06929805,
         },
     },
     "DunedinPACE": {
@@ -150,7 +152,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "DunedinPACE.csv",
-            "transform": lambda sum: sum - 1.949859,
             "preprocess": dunedin_pace_normalization,
             "default_imputation": "none",
         },
@@ -162,6 +163,9 @@ model_definitions = {
         "source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6366976/",
         "output": "Mortality Adjusted Age (Years)",
         "model": {"type": "GrimageModel", "file": "GrimAgeV1.csv"},
+        "usage": {
+            "commercial": CLOCK_FOUNDATION_USAGE,
+        },
     },
     "GrimAgeV2": {
         "year": 2022,
@@ -170,6 +174,9 @@ model_definitions = {
         "source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9792204/",
         "output": "Mortality Adjusted Age (Years)",
         "model": {"type": "GrimageModel", "file": "GrimAgeV2.csv"},
+        "usage": {
+            "commercial": CLOCK_FOUNDATION_USAGE,
+        },
     },
     "AlcoholMcCartney": {
         "year": 2018,
@@ -178,14 +185,6 @@ model_definitions = {
         "source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6158884/",
         "output": "Alcohol Consumption",
         "model": {"type": "LinearMethylationModel", "file": "Alcohol.csv"},
-    },
-    "BMI_McCartney": {
-        "year": 2018,
-        "species": "Human",
-        "tissue": "Blood",
-        "source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6158884/",
-        "output": "BMI",
-        "model": {"type": "LinearMethylationModel", "file": "BMI.csv"},
     },
     "DNAmTL": {
         "year": 2019,
@@ -196,7 +195,9 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "DNAmTL.csv",
-            "transform": lambda sum: sum - 7.924780053,
+        },
+        "usage": {
+            "commercial": CLOCK_FOUNDATION_USAGE,
         },
     },
     "HRSInCHPhenoAge": {
@@ -208,7 +209,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "HRSInCHPhenoAge.csv",
-            "transform": lambda sum: sum + 52.8334080,
         },
     },
     "Knight": {
@@ -220,7 +220,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "Knight.csv",
-            "transform": lambda sum: sum + 41.7,
         },
     },
     "LeeControl": {
@@ -232,7 +231,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "LeeControl.csv",
-            "transform": lambda sum: sum + 13.06182,
         },
     },
     "SexEstimation": {
@@ -256,7 +254,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "LeeRefinedRobust.csv",
-            "transform": lambda sum: sum + 30.74966,
         },
     },
     "LeeRobust": {
@@ -268,7 +265,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "LeeRobust.csv",
-            "transform": lambda sum: sum + 24.99772,
         },
     },
     "SmokingMcCartney": {
@@ -303,6 +299,10 @@ model_definitions = {
             "platform": "450K",
             "default_imputation": "none",
         },
+        "usage": {
+            "commercial": "Free to use",
+            "non-commercial": "Free to use",
+        },
     },
     "DeconvoluteBloodEPIC": {
         "year": 2024,
@@ -316,6 +316,10 @@ model_definitions = {
             "platform": "EPIC",
             "default_imputation": "none",
         },
+        "usage": {
+            "commercial": "Free to use",
+            "non-commercial": "Free to use",
+        },
     },
     "TwelveCellDeconvoluteBloodEPIC": {
         "year": 2024,
@@ -328,6 +332,10 @@ model_definitions = {
             "file": "twelve_cell_deconv.csv",
             "platform": "EPIC",
             "default_imputation": "none",
+        },
+        "usage": {
+            "commercial": "Free to use",
+            "non-commercial": "Free to use",
         },
     },
     "BMI_McCartney": {
@@ -411,7 +419,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "BMI_Reed.csv",
-            "transform": lambda sum: sum + 0,
         },
     },
     "ProstateCancerKirby": {
@@ -423,7 +430,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "ProstateCancerKirby.csv",
-            "transform": lambda sum: sum + 6.524,
         },
     },
     "HepatoXu": {
@@ -435,7 +441,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "HepatoXu.csv",
-            "transform": lambda sum: sum + 15.595,
         },
     },
     "CVD_Westerman": {
@@ -471,7 +476,6 @@ model_definitions = {
         "model": {
             "type": "LinearMethylationModel",
             "file": "DepressionBarbu.csv",
-            "transform": lambda sum: sum + 12.2169841,
         },
     },
     "TranscriptomicPredictionModel": {
@@ -735,6 +739,7 @@ class LinearModel:
     def predict(self, geo_data):
         matrix_data = self._get_data_matrix(geo_data)
         matrix_data = self.preprocess(matrix_data)
+        matrix_data.loc["intercept"] = 1
 
         # Join the coefficients and dnam_data on the index
         model_df = self.coefficients.join(matrix_data, how="inner")
@@ -758,7 +763,8 @@ class LinearMethylationModel(LinearModel):
         return geo_data.dnam
 
     def methylation_sites(self):
-        return list(self.coefficients.index)
+        unique_vars = set(self.coefficients.index) - {"intercept"}
+        return list(unique_vars)
 
 
 class LinearTranscriptomicModel(LinearModel):
