@@ -33,7 +33,7 @@ class DNAMethylationAnalyzer:
         stable_cpg_sites = variances[variances < threshold].index.tolist()        
         return stable_cpg_sites
 
-    def identify_significant_cpg_sites(self, group_field: str, group1: str, group2: str, p_value_threshold=0.05):
+    def identify_significant_cpg_sites(self, group_field: str = None, group1: str = None, group2: str = None, p_value_threshold=0.05):
         """
         Identifies significant CpG sites between two groups using a t-test.
         
@@ -44,23 +44,24 @@ class DNAMethylationAnalyzer:
         :return: List of significant CpG site IDs
         """
         # Get sample IDs for each group
-        group1_samples = self.metadata[self.metadata[group_field] == group1]['SampleID'].tolist()
-        group2_samples = self.metadata[self.metadata[group_field] == group2]['SampleID'].tolist()
+        group1_samples = self.metadata[self.metadata[group_field] == group1].index.tolist()
+        group2_samples = self.metadata[self.metadata[group_field] == group2].index.tolist()
 
         significant_cpg_sites = []
 
         # Iterate over each CpG site and perform a t-test
         for index, row in self.methylation_data.iterrows():
-            cpg_site = row['cpgSite']
+            # Extract methylation values for the CpG site across group1 and group2 samples
             group1_values = row[group1_samples].dropna()
             group2_values = row[group2_samples].dropna()
 
             # Perform t-test
-            t_stat, p_value = ttest_ind(group1_values, group2_values, equal_var=False)
-
-            # Check if p-value is below the threshold
-            if p_value < p_value_threshold:
-                significant_cpg_sites.append(cpg_site)
+            if len(group1_values) > 1 and len(group2_values) > 1:  # Ensure enough data points
+                t_stat, p_value = ttest_ind(group1_values, group2_values, equal_var=False)
+                
+                # Check if p-value is below the threshold
+                if p_value < p_value_threshold:
+                    significant_cpg_sites.append(cpg_site)
 
         return significant_cpg_sites
 
