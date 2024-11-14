@@ -28,9 +28,9 @@ class DNAMethylationAnalyzer:
         :return: List of stable CpG site IDs
         """
         # Calculate variance for each CpG site (each row)
-        variances = self.methylation_data.iloc[:, 1:].var(axis=1)
+        variances = self.methylation_data.var(axis=1)
         # Identify CpG sites with variance below the threshold
-        stable_cpg_sites = self.methylation_data[variances < threshold]['cpgSite']
+        stable_cpg_sites = variances[variances < threshold].index.tolist()        
         return stable_cpg_sites.tolist()
 
     def identify_significant_cpg_sites(self, group_field: str, group1: str, group2: str, p_value_threshold=0.05):
