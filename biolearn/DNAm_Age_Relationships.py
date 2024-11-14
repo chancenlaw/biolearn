@@ -31,7 +31,7 @@ class DNAMethylationAnalyzer:
         variances = self.methylation_data.var(axis=1)
         # Identify CpG sites with variance below the threshold
         stable_cpg_sites = variances[variances < threshold].index.tolist()        
-        return stable_cpg_sites.tolist()
+        return stable_cpg_sites
 
     def identify_significant_cpg_sites(self, group_field: str, group1: str, group2: str, p_value_threshold=0.05):
         """
