@@ -6,9 +6,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
 class DNAMethylationAnalyzer:
-    def __init__(self, methylation_file: pd.DataFrame, metadata_file: pd.DataFrame):
-        self.methylation_data = methylation_file
+    def __init__(self, metadata: pd.DataFrame, methylation_data: pd.DataFrame):
         self.metadata = metadata
+        self.methylation_data = methylation_data
 
     def preprocess_data(self):
         """
