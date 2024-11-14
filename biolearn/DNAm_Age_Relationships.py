@@ -50,7 +50,7 @@ class DNAMethylationAnalyzer:
         significant_cpg_sites = []
 
         # Iterate over each CpG site and perform a t-test
-        for index, row in self.methylation_data.iterrows():
+        for cpg_site, row in self.methylation_data.iterrows():
             # Extract methylation values for the CpG site across group1 and group2 samples
             group1_values = row[group1_samples].dropna()
             group2_values = row[group2_samples].dropna()
