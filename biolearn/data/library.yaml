@@ -32,7 +32,6 @@ items:
     path: https://ftp.ncbi.nlm.nih.gov/geo/series/GSE112nnn/GSE112618/matrix/GSE112618_series_matrix.txt.gz
     parser:
       type: geo-matrix
-      id_row: null
       matrix-start: 82
       metadata:
         sample_well:
