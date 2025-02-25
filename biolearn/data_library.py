@@ -6,6 +6,8 @@ import requests
 import gzip
 import shutil
 import os
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 from biolearn.util import cached_download, get_data_file
@@ -200,6 +202,11 @@ class GeoData:
             metadata=self.metadata.copy(deep=True),
             dnam=self.dnam.copy(deep=True) if self.dnam is not None else None,
             rna=self.rna.copy(deep=True) if self.rna is not None else None,
+            protein=(
+                self.protein.copy(deep=True)
+                if self.protein is not None
+                else None
+            ),
         )
 
     def quality_report(self, sites=None):
@@ -798,6 +805,9 @@ class DataSource:
         self.organism = source_definition.get(
             "organism", ""
         )  # Default empty string if organism is not provided
+        self.tags = source_definition.get(
+            "tags", []
+        )  # Default empty list if tags are not provided
 
         self.parser = self._create_parser(source_definition["parser"])
 
@@ -807,6 +817,10 @@ class DataSource:
         Returns:
             GeoData: An instance of the GeoData class containing the parsed geographical data.
         """
+
+        if self.tags and "work_needed" in self.tags:
+            self._show_work_needed_warning()
+
         cached = self.cache.get(self.id)
         if cached:
             return cached
@@ -837,6 +851,18 @@ class DataSource:
         if parser_type == "biomarkers-challenge-2024":
             return ChallengeDataParser(parser_data)
         raise ValueError(f"Unknown parser type: {parser_type}")
+
+    def _show_work_needed_warning(self):
+        """Display warning for datasets marked as needing work"""
+        warning_message = (
+            f"\nWARNING: Dataset {self.id} is marked as 'work_needed'.\n"
+            "This indicates the dataset may have one or more issues:\n"
+            "- DNA methylation data may not be populated\n"
+            "- Sex information is missing or not standardized\n"
+            "- Age values are not numeric or not standardized\n"
+            "Please verify and standardize these fields before using in production.\n"
+        )
+        print(warning_message)
 
 
 def parse_library_file(library_file, cache=None):
@@ -876,8 +902,12 @@ class DataLibrary:
         self.cache = cache if cache else default_cache()
         self.sources = []
         if library_file is None:
-            library_file = get_data_file("library.yaml")
-        self.load_sources(library_file)
+            curated_library_file = get_data_file("library.yaml")
+            self.load_sources(curated_library_file)
+            autoscan_library = get_data_file("geo_autoscan_library.yaml")
+            self.load_sources(autoscan_library)
+        else:
+            self.load_sources(library_file)
 
     def load_sources(self, library_file):
         """
