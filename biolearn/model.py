@@ -587,18 +587,18 @@ model_definitions = {
             "file": "Bocklandt.csv",
         },
     },
-    "PCHorvath1": {
+    "PCDNAmTL": {
         "year": 2022,
         "species": "Human",
-        "tissue": "Multi-tissue",
+        "tissue": "Blood, Adipose",
         "source": "https://doi.org/10.1038/s43587-022-00248-2",
-        "output": "Age (Years)",
+        "output": "Telomere Length",
         "model": {
             "type": "PCLinearTransformationModel",
-            "file": "https://storage.googleapis.com/biolearn/PCClock/PCHorvath1_model.csv",
-            "rotation": "https://storage.googleapis.com/biolearn/PCClock/PCHorvath1_rotation.csv",
-            "center": "https://storage.googleapis.com/biolearn/PCClock/PCHorvath1_center.csv",
-            "transform": lambda sum: anti_trafo(sum + 1.15834584357227),
+            "file": "https://storage.googleapis.com/biolearn/PCClock/PCDNAmTL_model.csv",
+            "rotation": "https://storage.googleapis.com/biolearn/PCClock/PCDNAmTL_rotation.csv",
+            "center": "https://storage.googleapis.com/biolearn/PCClock/PCDNAmTL_center.csv",
+            "transform": lambda sum: sum + 6.97295131019594,
         },
     },
 }
