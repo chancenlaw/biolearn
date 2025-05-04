@@ -587,7 +587,7 @@ model_definitions = {
             "file": "Bocklandt.csv",
         },
     },
-    "PCHannum": {
+    "PCPhenoAge": {
         "year": 2022,
         "species": "Human",
         "tissue": "Blood",
@@ -595,10 +595,10 @@ model_definitions = {
         "output": "Age (Years)",
         "model": {
             "type": "PCLinearTransformationModel",
-            "file": "https://storage.googleapis.com/biolearn/PCClock/PCHannum_model.csv",
-            "rotation": "https://storage.googleapis.com/biolearn/PCClock/PCHannum_rotation.csv",
-            "center": "https://storage.googleapis.com/biolearn/PCClock/PCHannum_center.csv",
-            "transform": lambda sum: sum + 68.7832716831577,
+            "file": "https://storage.googleapis.com/biolearn/PCClock/PCPhenoAge_model.csv",
+            "rotation": "https://storage.googleapis.com/biolearn/PCClock/PCPhenoAge_rotation.csv",
+            "center": "https://storage.googleapis.com/biolearn/PCClock/PCPhenoAge_center.csv",
+            "transform": lambda sum: sum + 68.1699502505631,
         },
     },
 }
