@@ -598,7 +598,7 @@ model_definitions = {
             "file": "https://storage.googleapis.com/biolearn/PCClock/PCHannum_model.csv",
             "rotation": "https://storage.googleapis.com/biolearn/PCClock/PCHannum_rotation.csv",
             "center": "https://storage.googleapis.com/biolearn/PCClock/PCHannum_center.csv",
-            "transform": lambda sum: anti_trafo(sum + 68.7832716831577),
+            "transform": lambda sum: sum + 68.7832716831577,
         },
     },
 }
